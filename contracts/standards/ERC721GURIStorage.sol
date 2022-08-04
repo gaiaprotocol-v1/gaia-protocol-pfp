@@ -24,7 +24,7 @@ contract ERC721GURIStorage is ERC721G, IERC721GURIStorage {
         public
         view
         virtual
-        override(ERC721, IERC721GURIStorage)
+        override(ERC721G, IERC721GURIStorage)
         returns (string memory)
     {
         _requireMinted(tokenId);
