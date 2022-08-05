@@ -296,12 +296,16 @@ contract ERC721G is Context, ERC165, IERC721G, IERC721Metadata, AccessControl, P
     ) internal virtual {}
 
     //operational functions
-    function setBaseURI(string calldata baseURI_) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    function setBaseURI(string calldata baseURI_) external {
+        require(hasRole(DEFAULT_ADMIN_ROLE, msg.sender), "ERC721G: must be default admin");
+
         __baseURI = baseURI_;
         emit SetBaseURI(baseURI_);
     }
 
-    function setPause(bool status) external onlyRole(PAUSER_ROLE) {
+    function setPause(bool status) external {
+        require(hasRole(PAUSER_ROLE, msg.sender), "ERC721G: must have pauser role to pause");
+
         if (status) _pause();
         else _unpause();
     }
@@ -316,20 +320,28 @@ contract ERC721G is Context, ERC165, IERC721G, IERC721Metadata, AccessControl, P
     }
 
     //mint/burn/transfer
-    function mint(address to, uint256 tokenId) public virtual onlyRole(MINTER_ROLE) {
+    function mint(address to, uint256 tokenId) public virtual {
+        require(hasRole(MINTER_ROLE, msg.sender), "ERC721G: must have minter role to mint");
+
         _mint(to, tokenId);
     }
 
-    function mintBatch(address to, uint256[] calldata tokenIds) external virtual onlyRole(MINTER_ROLE) {
+    function mintBatch(address to, uint256[] calldata tokenIds) external virtual {
+        require(hasRole(MINTER_ROLE, msg.sender), "ERC721G: must have minter role to mint");
+
         _mintBatch(to, tokenIds);
     }
 
-    function burn(uint256 tokenId) external virtual onlyRole(BURNER_ROLE) {
+    function burn(uint256 tokenId) external virtual {
+        require(hasRole(BURNER_ROLE, msg.sender), "ERC721G: must have burner role to burn");
+
         require(_isApprovedOrOwner(msg.sender, tokenId), "UNAUTHORIZED");
         _burn(tokenId);
     }
 
-    function burnBatch(address from, uint256[] calldata tokenIds) external virtual onlyRole(BURNER_ROLE) {
+    function burnBatch(address from, uint256[] calldata tokenIds) external virtual {
+        require(hasRole(BURNER_ROLE, msg.sender), "ERC721G: must have burner role to burn");
+
         require(from != address(0), "BURN_FROM_ADDRESS_0");
         uint256 amount = tokenIds.length;
         require(amount > 0, "INVALID_AMOUNT");
