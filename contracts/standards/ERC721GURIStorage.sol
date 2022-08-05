@@ -10,7 +10,7 @@ contract ERC721GURIStorage is ERC721G, IERC721GURIStorage {
     //keccak256("URI_SETTER_ROLE");
     bytes32 internal constant URI_SETTER_ROLE = 0x7804d923f43a17d325d77e781528e0793b2edd9890ab45fc64efd7b4b427744c;
 
-    mapping(uint256 => string) private _tokenURIs;
+    mapping(uint256 => string) internal _tokenURIs;
 
     constructor(
         string memory name,

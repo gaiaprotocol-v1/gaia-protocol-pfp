@@ -17,10 +17,10 @@ contract ERC721G is Context, ERC165, IERC721G, IERC721Metadata, AccessControl, P
 
     string private _name;
     string private _symbol;
-    mapping(uint256 => address) private _owners;
-    mapping(address => uint256) private _balances;
-    mapping(uint256 => address) private _tokenApprovals;
-    mapping(address => mapping(address => bool)) private _operatorApprovals;
+    mapping(uint256 => address) internal _owners;
+    mapping(address => uint256) internal _balances;
+    mapping(uint256 => address) internal _tokenApprovals;
+    mapping(address => mapping(address => bool)) internal _operatorApprovals;
 
     //keccak256("MINTER_ROLE");
     bytes32 internal constant MINTER_ROLE = 0x9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a6;
