@@ -23,6 +23,18 @@ const config: HardhatUserConfig = {
             },
         ],
     },
+    networks: {
+        mainnet: {
+            url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
+            accounts: [process.env.ADMIN || ''],
+            chainId: 1,
+        },
+        polygon: {
+            url: "https://polygon-rpc.com/",
+            accounts: [process.env.ADMIN || ''],
+            chainId: 137,
+        },
+    },
     etherscan: {
         apiKey: process.env.ETHERSCAN_API_KEY,
     },
