@@ -34,6 +34,11 @@ const config: HardhatUserConfig = {
             accounts: [process.env.ADMIN || ''],
             chainId: 137,
         },
+        klaytn: {
+            url: "https://klaytn04.fandom.finance/",
+            accounts: [process.env.ADMIN || ''],
+            chainId: 8217,
+        },
     },
     etherscan: {
         apiKey: process.env.ETHERSCAN_API_KEY,
